@@ -1,30 +1,37 @@
 import React from "react";
 import Header from "../Header.jsx";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getProfileData } from "../../actions/userActions";
+import ForUnAuthorizated from "./ForUnAuthorizated.jsx";
+import ForAuthorizated from "./ForAuthorizated.jsx";
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.getProfileData();
+  }
   render() {
     return (
-      <div className='homepage-wrapper'>
+      <div
+        className={
+          this.props.isTeamWindowOpen
+            ? "dark homepage-wrapper"
+            : "homepage-wrapper"
+        }
+      >
         <Header />
-        <main className='homepage-main'>
-          <div className='left-content'>
-            <div className='left-content-title-wrapper'>
-              <h1 className='left-content-title'>
-                Trello lets you work more collaboratively and get more done
-              </h1>
-            </div>
-            <div className='home-signup-btn-wrapper'>
-              <Link to='/signup'>
-                <button className='home-signup-btn'>Sign Up it's Free</button>
-              </Link>
-            </div>
-          </div>
-          <div className='right-content'>
-            <img src='/images/home-content.svg' alt='' />
-          </div>
-        </main>
+        {!this.props.isAuthorizated && <ForUnAuthorizated />}
+        {this.props.isAuthorizated && <ForAuthorizated />}
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isAuthorizated: state.user.isAuthorizated,
+  isTeamWindowOpen: state.team.isTeamWindowOpen,
+});
+const mapDispatchToProps = {
+  getProfileData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

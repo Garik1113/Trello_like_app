@@ -1,4 +1,5 @@
 const path = require("path");
+require("regenerator-runtime/runtime");
 const BUILD_DIR = path.resolve(__dirname, "./public/build");
 const APP_DIR = path.resolve(__dirname, "./client");
 
@@ -19,9 +20,8 @@ module.exports = {
         exclude: "/node_modules",
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["@babel/react"],
-          },
+
+          options: { presets: ["@babel/react"] },
         },
       },
       {

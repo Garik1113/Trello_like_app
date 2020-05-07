@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./userReducers";
+import { errors } from "./errorReducers";
+import { team } from "./teamReducers";
 export default combineReducers({
-  userState: userReducer,
+  user: userReducer,
+  errors,
+  team,
 });

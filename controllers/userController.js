@@ -10,9 +10,7 @@ class UserController {
     }
     const existUser = await Users.findOne({ email: req.body.email });
     if (existUser) {
-      return res
-        .status(403)
-        .send({ email: { msg: "User with that email exist" } });
+      return res.status(401).send("User with that email is exist");
     }
     const password = await hashPassword(req.body.password);
     Users.create(
@@ -36,18 +34,27 @@ class UserController {
     }
     const user = await Users.findOne({ email: req.body.email });
     if (!user) {
-      return res
-        .status(401)
-        .send({ email: { msg: "User with that email is not exist" } });
+      return res.status(401).send("User with that email is not exist");
     }
     const isCorrectPassword = await verifyPassword(
       req.body.password,
       user.password
     );
     if (!isCorrectPassword) {
-      return res.status(401).send({ password: { msg: "Incorrect password" } });
+      return res.status(401).send("Incorrect password");
     }
     return res.status(200).send({ token: generateToken(user) });
+  }
+
+  async getProfileData(req, res) {
+    if (req.user) {
+      const user = await Users.findById(req.user._id);
+      if (user) {
+        res.status(200).send(user);
+      }
+    } else {
+      res.status(401).send("No Profile data");
+    }
   }
 }
 

@@ -8,4 +8,9 @@ const {
 const { authenticateUser } = require("../helpers/tokenConfig");
 userRouter.post("/signup", signupValidation(), UserController.signup);
 userRouter.post("/login", loginValidation(), UserController.login);
+userRouter.get(
+  "/getProfileData",
+  authenticateUser,
+  UserController.getProfileData
+);
 module.exports = userRouter;

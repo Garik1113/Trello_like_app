@@ -15,9 +15,9 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route path='/' exact component={HomePage} />
-          <Route path='/login' component={Login} />
-          <Route path='/signup' component={Signup} />
+          <Route path="/" exact component={HomePage} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
         </Router>
       </Provider>
     );

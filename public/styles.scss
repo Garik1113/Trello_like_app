@@ -4,7 +4,7 @@
 }
 //Header
 .homepage-header {
-  background: #f3f1f11a;
+  background: #018f94e5;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,11 +22,48 @@
 }
 
 .home-login-link {
-  font-size: 17px;
+  font-size: 20px;
   margin-left: 10px;
   color: #d41872;
   text-decoration: none;
   margin-right: 10px;
+  &:hover {
+    color: #c40d35;
+  }
+}
+
+.header-auth-btn-wrapper {
+  display: flex;
+}
+.header-auth-btn {
+  font-size: 20px;
+  color: #ffffff;
+  background: #fa4299;
+  border: none;
+  border-radius: 100%;
+  padding: 0.4rem;
+  margin-left: 4px;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background: #00d9ff;
+    color: #ffffff;
+  }
+}
+.header-auth-add-btn {
+  font-size: 20px;
+  color: #000000;
+  background: #04ddfa;
+  border: none;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  &:hover {
+    background: #00d9ff;
+    color: #ffffff;
+  }
 }
 
 //Header End
@@ -36,7 +73,7 @@
 .homepage-wrapper {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0079bf, #5067c5);
+  background: linear-gradient(135deg, #d3d8db, #e4e5eb);
 }
 .homepage-main {
   display: flex;
@@ -125,4 +162,178 @@
   text-decoration: none;
   font-size: 14px;
 }
+
+.error-msg {
+  color: red;
+}
 // Login page End
+
+//for Authorizated homepage
+
+.for-authorizated-wrapper {
+  position: relative;
+  z-index: 1;
+}
+.dark {
+  width: 100%;
+  height: 100%;
+  background: #02000180;
+  z-index: 15;
+}
+.create-team-btn {
+  max-width: 300px;
+  padding: 0.4rem;
+  border: none;
+  background: #d41872;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  &:hover {
+    background: #fa4299;
+    color: #000000;
+  }
+}
+
+.create-team-title {
+  color: #ffffff;
+  font-size: 24px;
+}
+.create-team-wrapper {
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  margin: 100px auto;
+  // margin: 0 auto;
+  text-align: center;
+  background: #03b9b9;
+  animation: first 1s;
+  z-index: 10;
+}
+@keyframes first {
+  from {
+    opacity: 0;
+    margin-top: 0px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 100px;
+  }
+}
+
+.close-create-team-window {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 40px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.create-team-main {
+  max-width: 400px;
+  padding: 15px 10px;
+  height: 100%;
+  margin: 0 auto;
+}
+.create-team-input {
+  padding: 0.4rem;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 5px;
+}
+.create-team-textarea {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.create-new-team-btn {
+  padding: 0.5rem;
+  width: 100%;
+  color: #ffffff;
+  background: #08df73;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 5px;
+  &:hover {
+    background: #5067c5;
+  }
+}
+
+.home-team-title {
+  font-size: 20px;
+  color: #333333;
+  margin-top: 10px;
+}
+
+//Create team window end
+
+//User Menu
+.user-menu-wrapper {
+  max-width: 400px;
+  padding: 15px 10px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  border-radius: 5px;
+}
+.user-menu-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  color: #00d9ff;
+  background: #555555;
+  margin-top: 5px;
+  cursor: pointer;
+  &:hover {
+    background: #03b9b9;
+    color: #ffffff;
+  }
+}
+
+//Team menu component
+
+.team-menu-wrapper {
+  background: #ffffff transparent;
+  max-width: 300px;
+  margin-left: 15px;
+  width: 100%;
+  .team-menu-item {
+    margin-top: 10px;
+    color: #000000;
+    width: 100%;
+    height: 40px;
+    padding-right: 15px;
+    cursor: pointer;
+    &:hover {
+      background: #cec8c8;
+    }
+    .team-menu-heart {
+      font-size: 25px;
+      color: #018f94e5;
+      margin-right: 10px;
+      margin-top: 15px;
+    }
+  }
+}
+
+.team-name-item {
+  width: 100%;
+  height: 40px;
+  color: #03b9b9;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background: #cec8c8;
+  }
+  p {
+    font-size: 30px;
+    margin-top: 15px;
+    margin-right: 5px;
+  }
+}

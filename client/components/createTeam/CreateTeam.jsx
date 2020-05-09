@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { createTeam, closeCreateTeamWindow } from "../../actions/teamActions";
 
 // import { browserHistory } from "react-router";
-import { createBrowserHistory } from "history";
+import history from "../../history";
 class CreateTeam extends React.Component {
   state = {
     name: "",
@@ -26,57 +26,61 @@ class CreateTeam extends React.Component {
     this.setState({ errorMsg: "" });
 
     const team = { name, type, description };
-    const history = createBrowserHistory({ forceRefresh: true });
-    console.log(history);
+    // const history = createBrowserHistory({ forceRefresh: true });
+
     this.props.createTeam(team, history);
 
     return;
   };
   render() {
     return (
-      <div className="create-team-wrapper">
-        <header>
-          <h3 className="create-team-title">Create new Team</h3>
-          <span
-            className="close-create-team-window"
-            onClick={this.props.closeCreateTeamWindow}
-          >
-            &times;
-          </span>
-        </header>
-        <main className="create-team-main">
-          <small className="error-msg">{this.state.errorMsg}</small>
-          <input
-            type="text"
-            name="name"
-            placeholder="Team Name"
-            className="create-team-input"
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="type"
-            placeholder="Team Type"
-            className="create-team-input"
-            onChange={this.handleChange}
-          />
-          <textarea
-            name="description"
-            placeholder="Team Description"
-            className="create-team-textarea"
-            rows="5"
-            onChange={this.handleChange}
-          ></textarea>
-          <button
-            className="create-new-team-btn"
-            disabled={false}
-            onClick={() => {
-              this.createNewTeam();
-            }}
-          >
-            Continue
-          </button>
-        </main>
+      <div className='create-team-wrapper container'>
+        <div className='row'>
+          <div className='col-8 offset-2'>
+            <header>
+              <h3 className='create-team-title'>Create new Team</h3>
+              <span
+                className='close-create-team-window'
+                onClick={this.props.closeCreateTeamWindow}
+              >
+                &times;
+              </span>
+            </header>
+            <main className='create-team-main'>
+              <small className='error-msg'>{this.state.errorMsg}</small>
+              <input
+                type='text'
+                name='name'
+                placeholder='Team Name'
+                className='create-team-input'
+                onChange={this.handleChange}
+              />
+              <input
+                type='text'
+                name='type'
+                placeholder='Team Type'
+                className='create-team-input'
+                onChange={this.handleChange}
+              />
+              <textarea
+                name='description'
+                placeholder='Team Description'
+                className='create-team-textarea'
+                rows='5'
+                onChange={this.handleChange}
+              ></textarea>
+              <button
+                className='create-new-team-btn'
+                disabled={false}
+                onClick={() => {
+                  this.createNewTeam();
+                }}
+              >
+                Continue
+              </button>
+            </main>
+          </div>
+        </div>
       </div>
     );
   }

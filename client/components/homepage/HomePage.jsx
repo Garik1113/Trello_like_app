@@ -8,7 +8,7 @@ import ForAuthorizated from "./ForAuthorizated.jsx";
 
 class HomePage extends React.Component {
   componentDidMount() {
-    this.props.getProfileData();
+    // this.props.getProfileData();
   }
   render() {
     return (

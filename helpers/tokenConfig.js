@@ -18,7 +18,6 @@ const authenticateUser = (req, res, next) => {
     if (err) {
       return res.status(401).send("Incorrect token");
     }
-
     req.user = user;
     return next();
   });

@@ -74,6 +74,8 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, #d3d8db, #e4e5eb);
+  position: relative;
+  z-index: 1;
 }
 .homepage-main {
   display: flex;
@@ -202,22 +204,23 @@
 .create-team-wrapper {
   width: 100%;
   height: 500px;
-  position: absolute;
-  margin: 100px auto;
-  // margin: 0 auto;
+  position: absolute; /*it can be fixed too*/
+  left: 0;
+  right: 0;
+  top: 0px;
+  bottom: 0;
+  margin: auto;
   text-align: center;
   background: #03b9b9;
   animation: first 1s;
-  z-index: 10;
+  z-index: 17;
 }
 @keyframes first {
   from {
     opacity: 0;
-    margin-top: 0px;
   }
   to {
     opacity: 1;
-    margin-top: 100px;
   }
 }
 
@@ -277,8 +280,9 @@
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   position: absolute;
+  z-index: 15;
   right: 0px;
-  top: 50px;
+  top: 10px;
   border-radius: 5px;
 }
 .user-menu-btn {
@@ -324,7 +328,7 @@
 
 .team-name-item {
   width: 100%;
-  height: 40px;
+  padding: 0.3rem;
   color: #03b9b9;
   font-size: 20px;
   cursor: pointer;
@@ -335,5 +339,84 @@
     font-size: 30px;
     margin-top: 15px;
     margin-right: 5px;
+  }
+}
+
+//CreateTeamPage
+.team-name-icon {
+  font-size: 80px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #f5efef;
+}
+h2.team-name {
+  color: #555555;
+  font-size: 23px;
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+.team-page-btns {
+  padding: 0.2rem 0.5rem;
+  background: #dfe1e6;
+  color: #172b4d;
+  font-weight: 600;
+  border: none;
+  margin-bottom: -2px;
+  border: 2px solid #888888;
+  border-radius: 3px;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background: #a7aaaf;
+  }
+}
+.active-setting {
+  background: #ffffff;
+  color: #000000;
+  // border: 2px solid #888;
+  border-bottom: none;
+  &:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+}
+
+//Board Sittings
+.board-card {
+  max-width: 300px;
+  width: 100%;
+  height: 100px;
+  background: #d41872;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background: #c40d35;
+  }
+  h3 {
+    color: #ffffff;
+    font-size: 18px;
+  }
+}
+.create-new-board {
+  max-width: 300px;
+  width: 100%;
+  height: 100px;
+  background: #c4bcbf;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: #cec8c8;
+  }
+  h3 {
+    color: #0051ff;
+    font-size: 18px;
+    line-height: 72px;
   }
 }

@@ -4,9 +4,10 @@ const TeamController = require("../controllers/teamController");
 const { authenticateUser } = require("../helpers/tokenConfig");
 
 TeamRouter.post("/create", authenticateUser, TeamController.create);
+TeamRouter.get("/getTeams", authenticateUser, TeamController.getCurrentTeams);
 TeamRouter.get(
-  "/getCurrentTeams",
+  "/getTeamData/:id",
   authenticateUser,
-  TeamController.getCurrentTeams
+  TeamController.getTeamData
 );
 module.exports = TeamRouter;

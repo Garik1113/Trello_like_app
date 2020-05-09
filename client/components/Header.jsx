@@ -5,48 +5,40 @@ import { getProfileData, logOut, toggleUserMenu } from "../actions/userActions";
 import { openCreateTeamWindow } from "../actions/teamActions";
 class Header extends React.Component {
   componentDidMount() {
-    //  this.props.getProfileData();
+    this.props.getProfileData();
   }
   render() {
     return (
-      <header className="homepage-header">
-        <Link to="/" className="logo-link">
-          <div className="logo-wrapper"></div>
+      <header className='homepage-header'>
+        <Link to='/' className='logo-link'>
+          <div className='logo-wrapper'></div>
         </Link>
         {!this.props.isAuthorizated && (
           <div>
-            <Link to="/login" className="home-login-link">
+            <Link to='/login' className='home-login-link'>
               Login
             </Link>
-            <Link to="/signup" className="home-login-link">
+            <Link to='/signup' className='home-login-link'>
               Signup
             </Link>
           </div>
         )}
         {this.props.isAuthorizated && (
-          <div className="header-auth-btn-wrapper">
+          <div className='header-auth-btn-wrapper'>
             <button
-              className="header-auth-add-btn"
+              className='header-auth-add-btn'
               onClick={() => this.props.openCreateTeamWindow()}
             >
               +
             </button>
             {this.props.user && this.props.user.email && (
               <button
-                className="header-auth-btn"
+                className='header-auth-btn'
                 onClick={() => this.props.toggleUserMenu()}
               >
                 {this.props.user.email[0].toUpperCase()}
               </button>
             )}
-
-            {/* <Link
-              to="/"
-              className="home-login-link"
-              onClick={this.props.logOut}
-            >
-              Log Out
-            </Link> */}
           </div>
         )}
       </header>

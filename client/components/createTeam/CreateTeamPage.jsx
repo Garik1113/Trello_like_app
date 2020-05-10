@@ -10,10 +10,16 @@ import {
   activateBoardsSetting,
   activateMembersSetting,
   activateSettingsSetting,
+  getTeams,
 } from "../../actions/teamActions";
+
 import { matchPath } from "react-router";
-import { getTeamBoards } from "../../actions/boardActions";
-import BoardSettings from "../settings/BoardSettings.jsx";
+import {
+  getTeamBoards,
+  toggleBoardCreateMenu,
+} from "../../actions/boardActions";
+import BoardSettings from "../boards/BoardSettings.jsx";
+import CreateBoard from "../boards/CreateBoard.jsx";
 const TeamSittingsHeader = styled.div`
   width: 100%;
   height: auto;
@@ -36,6 +42,7 @@ class CreateTeamPage extends React.Component {
     }).params;
     this.props.getCurrentTeam(id);
     this.props.getTeamBoards(id);
+    this.props.getTeams();
   }
 
   render() {
@@ -43,6 +50,7 @@ class CreateTeamPage extends React.Component {
     return (
       <div>
         <Header />
+        {this.props.BoardCreateMenuOpen && <CreateBoard />}
         <div className='col-2 offset-10'>
           {this.props.userMenuOpen && <UserMenu />}
         </div>
@@ -90,7 +98,10 @@ class CreateTeamPage extends React.Component {
           </TeamSittingsHeader>
         </div>
         <div className='mt-4'>
-          <BoardSettings boards={this.props.boards} />
+          <BoardSettings
+            boards={this.props.boards}
+            openBoardCreateMenu={() => this.props.toggleBoardCreateMenu(true)}
+          />
         </div>
       </div>
     );
@@ -101,8 +112,10 @@ const mapStateToProps = (state) => ({
   userMenuOpen: state.user.userMenuOpen,
   currentTeam: state.team.currentTeam,
   boards: state.boards.teamBoards,
+  BoardCreateMenuOpen: state.boards.isCreatBoardMenuOpen,
   errors: state.errors,
   activeSetting: state.team.activeSetting,
+  teams: state.team.teams,
 });
 
 export default connect(mapStateToProps, {
@@ -111,4 +124,6 @@ export default connect(mapStateToProps, {
   activateBoardsSetting,
   activateMembersSetting,
   activateSettingsSetting,
+  toggleBoardCreateMenu,
+  getTeams,
 })(CreateTeamPage);

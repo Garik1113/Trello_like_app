@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default class BoardSettings extends React.Component {
   render() {
     return (
@@ -9,14 +9,16 @@ export default class BoardSettings extends React.Component {
             this.props.boards.map((e) => {
               return (
                 <div className='col-3 mt-2' key={e._id}>
-                  <div className='board-card'>
-                    <h3>{e.name}</h3>
-                  </div>
+                  <Link to={`/boards/pages/${e._id}`} className='normal-link'>
+                    <div className='board-card'>
+                      <h3>{e.name}</h3>
+                    </div>
+                  </Link>
                 </div>
               );
             })}
 
-          <div className='col-3 mt-2'>
+          <div className='col-3 mt-2' onClick={this.props.openBoardCreateMenu}>
             <div className='create-new-board'>
               <h3>Create New Board</h3>
             </div>

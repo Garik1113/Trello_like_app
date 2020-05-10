@@ -12,6 +12,7 @@ import {
   ACTIVATE_BOARDS_SETTING,
   ACTIVATE_MEMBERS_SETTING,
   ACTIVATE_SETTINGS_SETTING,
+  SELECT_TEAM,
 } from "../constants";
 import { returnErrors, clearErrors } from "./errorActions";
 
@@ -104,5 +105,12 @@ export const activateMembersSetting = () => {
 export const activateSettingsSetting = () => {
   return {
     type: ACTIVATE_SETTINGS_SETTING,
+  };
+};
+
+export const selectTeam = (team_id) => {
+  return {
+    type: SELECT_TEAM,
+    payload: team_id,
   };
 };

@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const UserRouter = require("./routers/userRouter");
 const TeamRouter = require("./routers/teamRouter");
 const BoardRouter = require("./routers/boardRoutes");
+const ListRouter = require("./routers/listRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", UserRouter);
 app.use("/teams", TeamRouter);
 app.use("/boards", BoardRouter);
+app.use("/lists", ListRouter);
 
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root });

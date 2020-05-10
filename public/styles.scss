@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
 }
+
+ul {
+  list-style: none;
+}
+
 //Header
 .homepage-header {
   background: #018f94e5;
@@ -207,7 +212,7 @@
   position: absolute; /*it can be fixed too*/
   left: 0;
   right: 0;
-  top: 0px;
+  top: 100px;
   bottom: 0;
   margin: auto;
   text-align: center;
@@ -221,6 +226,12 @@
   }
   to {
     opacity: 1;
+  }
+}
+.normal-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
   }
 }
 
@@ -305,7 +316,7 @@
 .team-menu-wrapper {
   background: #ffffff transparent;
   max-width: 300px;
-  margin-left: 15px;
+  margin-left: 55px;
   width: 100%;
   .team-menu-item {
     margin-top: 10px;
@@ -313,6 +324,7 @@
     width: 100%;
     height: 40px;
     padding-right: 15px;
+
     cursor: pointer;
     &:hover {
       background: #cec8c8;
@@ -328,7 +340,6 @@
 
 .team-name-item {
   width: 100%;
-  padding: 0.3rem;
   color: #03b9b9;
   font-size: 20px;
   cursor: pointer;
@@ -337,8 +348,11 @@
   }
   p {
     font-size: 30px;
-    margin-top: 15px;
-    margin-right: 5px;
+    margin-bottom: -3px;
+    // margin-right: 5px;
+  }
+  span {
+    margin-left: 10px;
   }
 }
 
@@ -402,9 +416,10 @@ h2.team-name {
   }
 }
 .create-new-board {
-  max-width: 300px;
+  max-width: 400px;
+  min-width: 200px;
   width: 100%;
-  height: 100px;
+  // height: 100px;
   background: #c4bcbf;
   border-radius: 5px;
   padding: 10px;
@@ -418,5 +433,190 @@ h2.team-name {
     color: #0051ff;
     font-size: 18px;
     line-height: 72px;
+    white-space: nowrap;
   }
+}
+
+// Create New Board Window
+.board-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #333030a4;
+  z-index: 20;
+}
+.create-board-wrapper {
+  background: #3b383abd;
+  width: 100%;
+  min-width: 300px;
+  // height: 150px;
+  padding: 10px 15px;
+  margin-top: 20px;
+  border-radius: 7px;
+  position: relative;
+  input {
+    width: 90%;
+    padding: 0.4rem;
+    border-radius: 7px;
+    outline: none;
+    background: #d3aac548;
+    color: #000000;
+    border: none;
+    &::placeholder {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+  }
+  .current-team-name-btn {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #555555;
+    margin-top: 5px;
+    &:focus {
+      outline: none;
+      border: none;
+    }
+    &:hover {
+      background: #333333;
+    }
+  }
+  .current-team-name-btn::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid #ffffff;
+    margin-left: 5px;
+  }
+  span {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .team-name-btn {
+    padding: 0.4rem;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #555555;
+    margin-top: 5px;
+    &:hover {
+      background: #888888;
+    }
+  }
+  .create-board-btn {
+    padding: 0.3rem 0.5rem;
+    color: #333333;
+    border: none;
+    border-radius: 5px;
+    background: #08be63;
+
+    margin-top: 10px;
+    &:hover {
+      background: #08df73;
+      color: #ffffff;
+    }
+  }
+}
+
+//Board Page
+.add-list-wrapper {
+}
+.select-input-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.4rem;
+  background: #5555552d;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  &:hover {
+    background: #3333333a;
+  }
+  &:focus {
+    border: none;
+    outline: none;
+  }
+  span {
+    font-size: 20px;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+.add-list-input-wrapper {
+  width: 100%;
+  min-width: 250px;
+
+  padding: 0.3rem;
+  border-radius: 5px;
+  background: #888888;
+  .add-list-btn {
+    background: #19c26d;
+    width: 100px;
+    height: 40px;
+    color: #ffffff;
+    font-size: 18px;
+    margin-top: 5px;
+    border: none;
+    &:hover {
+      background: #08df73;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      padding: 0.4rem;
+      background: #ffffff;
+      width: 90%;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 18px;
+    }
+    span {
+      color: #000000;
+      font-size: 30px;
+      margin-top: -15px;
+      cursor: pointer;
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.list-card {
+  width: 100%;
+  height: 35px;
+  background: #555555;
+  color: #ffffff;
+}
+
+.droppable-wrapper {
+  width: 100%;
+  min-width: 250px;
+  padding: 15px;
+  background: #555555;
+  text-align: center;
+  border-radius: 7px;
 }

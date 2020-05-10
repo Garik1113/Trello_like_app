@@ -13,11 +13,11 @@ export default class Droppable extends React.Component {
   render() {
     return (
       <div
-        id={this.props.id}
         onDrop={this.drop}
         onDragOver={this.allowDrop}
-        style={this.props.style}
+        className='droppable-wrapper'
       >
+        <h4 className='text-center'>{this.props.name}</h4>
         {this.props.children}
       </div>
     );
@@ -25,7 +25,6 @@ export default class Droppable extends React.Component {
 }
 
 Droppable.propTypes = {
-  id: PropTypes.string,
-  style: PropTypes.object,
+  name: PropTypes.string,
   children: PropTypes.node,
 };

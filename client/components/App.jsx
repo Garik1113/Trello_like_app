@@ -8,10 +8,11 @@ import history from "../history";
 
 //Components
 import Login from "./login/Login.jsx";
-import Dnd from "../components/Dnd/dndTest";
 import HomePage from "../components/homepage/HomePage.jsx";
 import Signup from "../components/signup/Signup.jsx";
 import CreateTeamPage from "../components/createTeam/CreateTeamPage.jsx";
+import BoardPage from "./boards/BoardPage.jsx";
+
 export default class App extends React.Component {
   render() {
     return (
@@ -21,6 +22,7 @@ export default class App extends React.Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/teams/pages/:id' exact component={CreateTeamPage} />
+          <Route path='/boards/pages/:id' exact component={BoardPage} />
         </Router>
       </Provider>
     );

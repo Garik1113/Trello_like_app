@@ -9,6 +9,7 @@ import {
   ACTIVATE_BOARDS_SETTING,
   ACTIVATE_MEMBERS_SETTING,
   ACTIVATE_SETTINGS_SETTING,
+  SELECT_TEAM,
 } from "../constants";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   admin: "",
   teams: [],
   currentTeam: {},
+  selectedTeam: {},
   activeSetting: "boards",
 };
 
@@ -37,6 +39,9 @@ export const team = (state = initialState, action) => {
       return state;
     case GET_CURRENT_TEAM:
       return { ...state, currentTeam: action.payload };
+    case SELECT_TEAM:
+      const team = state.teams.find((e) => e._id === action.payload);
+      return { ...state, selectedTeam: team };
     case GET_TEAMS_FAILED:
       return state;
     case ACTIVATE_BOARDS_SETTING:
@@ -50,7 +55,7 @@ export const team = (state = initialState, action) => {
         ...state,
         teams: state.teams.map((e) =>
           e._id === action.payload
-            ? { ...e, isOpenMenu: true, selected: true }
+            ? { ...e, isOpenMenu: !e.isOpenMenu, selected: true }
             : { ...e, isOpenMenu: false, selected: false }
         ),
       };

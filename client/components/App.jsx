@@ -10,7 +10,7 @@ import history from "../history";
 import Login from "./login/Login.jsx";
 import HomePage from "../components/homepage/HomePage.jsx";
 import Signup from "../components/signup/Signup.jsx";
-import CreateTeamPage from "../components/createTeam/CreateTeamPage.jsx";
+import TeamPage from "../components/teams/TeamPage.jsx";
 import BoardPage from "./boards/BoardPage.jsx";
 
 export default class App extends React.Component {
@@ -21,7 +21,7 @@ export default class App extends React.Component {
           <Route path='/' exact component={HomePage} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/teams/pages/:id' exact component={CreateTeamPage} />
+          <Route path='/teams/pages/:id' exact component={TeamPage} />
           <Route path='/boards/pages/:id' exact component={BoardPage} />
         </Router>
       </Provider>

@@ -4,6 +4,6 @@ const ListController = require("../controllers/listController");
 const { authenticateUser } = require("../helpers/tokenConfig");
 
 ListRouter.post("/create", authenticateUser, ListController.create);
-ListRouter.get("/get/:board_id", ListController.getLists);
+ListRouter.get("/get/:board_id", authenticateUser, ListController.getLists);
 
 module.exports = ListRouter;

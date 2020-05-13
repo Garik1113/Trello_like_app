@@ -4,6 +4,7 @@ import {
   GET_TEAM_BOARDS,
   TOGGLE_BOARD_CREATE_MENU,
   CREATE_NEW_BOARD,
+  GET_USER_BOARDS,
 } from "../constants";
 import { returnErrors } from "./errorActions";
 import history from "../history";
@@ -43,6 +44,20 @@ export const createNewBoard = (boardName, team_id) => (dispatch, getState) => {
         return history.push(`/boards/pages/${res.data._id}`);
       } else {
         return history.push(`/teams/pages/${team_id}`);
+      }
+    })
+    .catch((e) => returnErrors(e.response.data, e.response.status));
+};
+
+export const getUserBoadrs = () => (dispatch, getState) => {
+  axios
+    .get("/boards/getUserBoards", tokenConfig(getState))
+    .then((res) => {
+      if (res.status === 200) {
+        return dispatch({
+          type: GET_USER_BOARDS,
+          payload: res.data,
+        });
       }
     })
     .catch((e) => returnErrors(e.response.data, e.response.status));

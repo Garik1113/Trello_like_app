@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { matchPath } from "react-router";
+import history from "../../history";
 import {
   toggleBoardCreateMenu,
   createNewBoard,
@@ -12,8 +14,14 @@ class CreateBoard extends React.Component {
     boardName: "",
   };
   createNewBoard = () => {
+    const { id } = matchPath(history.location.pathname, {
+      path: "/teams/pages/:id",
+      exact: true,
+      strict: true,
+    }).params;
     const { boardName } = this.state;
-    const team_id = this.props.selectedTeam._id;
+    const team_id = this.props.selectedTeam._id || id;
+    console.log(this.props.selectedTeam);
     if (boardName && team_id) {
       this.props.createNewBoard(boardName, team_id);
     }

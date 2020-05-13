@@ -114,3 +114,11 @@ export const selectTeam = (team_id) => {
     payload: team_id,
   };
 };
+
+export const inviteMembers = (email, team_id) => (dispatch, getState) => {
+  axios
+    .post("/teams/invite", { email, team_id }, tokenConfig(getState))
+    .then((res) => {
+      console.log(res);
+    });
+};

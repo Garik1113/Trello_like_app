@@ -32,6 +32,19 @@ class TeamController {
       res.status(200).send({ team: data, boards });
     });
   }
+  invite(req, res) {
+    const { team_id, email } = req.body;
+    Teams.findByIdAndUpdate(
+      team_id,
+      { $push: { members: { memberEmail: email } } },
+      (err, data) => {
+        if (err) {
+          return res.status(500).send("Something wents wrong");
+        }
+        return res.status(200).send(data);
+      }
+    );
+  }
 }
 
 module.exports = new TeamController();

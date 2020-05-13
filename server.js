@@ -9,6 +9,7 @@ const UserRouter = require("./routers/userRouter");
 const TeamRouter = require("./routers/teamRouter");
 const BoardRouter = require("./routers/boardRoutes");
 const ListRouter = require("./routers/listRouter");
+const CardRouter = require("./routers/cardRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
@@ -22,6 +23,7 @@ app.use("/users", UserRouter);
 app.use("/teams", TeamRouter);
 app.use("/boards", BoardRouter);
 app.use("/lists", ListRouter);
+app.use("/cards", CardRouter);
 
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root });
@@ -33,6 +35,7 @@ const startApp = async () => {
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
       useCreateIndex: true,
     },
     (err) => {

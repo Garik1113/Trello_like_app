@@ -4,7 +4,7 @@ const team = new Schema({
   type: { type: String, required: true },
   adminEmail: { type: String, required: true },
   description: { type: String },
-  members: [{ name: String, email: String }],
+  members: [{ memberEmail: String }],
 });
 
 module.exports = model("teams", team);

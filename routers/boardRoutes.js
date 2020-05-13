@@ -9,4 +9,9 @@ BoardRouter.get(
   BoardController.getTeamBoards
 );
 BoardRouter.post("/create", authenticateUser, BoardController.createNewBoard);
+BoardRouter.get(
+  "/getUserBoards",
+  authenticateUser,
+  BoardController.getUserBoards
+);
 module.exports = BoardRouter;

@@ -10,6 +10,7 @@ import {
   LOG_IN_FAILED,
   TOGGLE_USER_MENU,
 } from "../constants";
+import history from "../history";
 
 export const signup = (user) => (dispatch, getState) => {
   axios
@@ -76,6 +77,10 @@ export const getProfileData = () => (dispatch, getState) => {
 
 export const logOut = () => (dispatch) => {
   dispatch(clearErrors());
+  history.push("/");
+  dispatch({
+    type: TOGGLE_USER_MENU,
+  });
   return dispatch({
     type: LOG_OUT,
   });

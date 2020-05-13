@@ -10,4 +10,5 @@ TeamRouter.get(
   authenticateUser,
   TeamController.getTeamData
 );
+TeamRouter.post("/invite", authenticateUser, TeamController.invite);
 module.exports = TeamRouter;

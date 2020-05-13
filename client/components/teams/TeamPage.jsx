@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Header from "../Header.jsx";
 import UserMenu from "../userComponents/UserMenu.jsx";
-import CreateTeam from "../createTeam/CreateTeam.jsx";
+import CreateTeam from "./CreateTeam.jsx";
 import styled from "styled-components";
 import history from "../../history";
+import MemberSettings from "./Members.jsx";
 import {
   getCurrentTeam,
   activateBoardsSetting,
@@ -33,7 +34,7 @@ const TeamLogo = styled.div`
   background-color: #999;
   text-align: center;
 `;
-class CreateTeamPage extends React.Component {
+class TeamPage extends React.Component {
   componentDidMount() {
     const { id } = matchPath(history.location.pathname, {
       path: "/teams/pages/:id",
@@ -47,6 +48,11 @@ class CreateTeamPage extends React.Component {
 
   render() {
     const { name } = this.props.currentTeam;
+    const { id } = matchPath(history.location.pathname, {
+      path: "/teams/pages/:id",
+      exact: true,
+      strict: true,
+    }).params;
     return (
       <div>
         <Header />
@@ -97,12 +103,19 @@ class CreateTeamPage extends React.Component {
             </div>
           </TeamSittingsHeader>
         </div>
-        <div className='mt-4'>
-          <BoardSettings
-            boards={this.props.boards}
-            openBoardCreateMenu={() => this.props.toggleBoardCreateMenu(true)}
-          />
-        </div>
+        {this.props.activeSetting === "boards" && (
+          <div className='mt-4'>
+            <BoardSettings
+              boards={this.props.boards}
+              openBoardCreateMenu={() => this.props.toggleBoardCreateMenu(true)}
+            />
+          </div>
+        )}
+        {this.props.activeSetting === "members" && (
+          <div className='mt-4'>
+            <MemberSettings team_id={id} />
+          </div>
+        )}
       </div>
     );
   }
@@ -126,4 +139,4 @@ export default connect(mapStateToProps, {
   activateSettingsSetting,
   toggleBoardCreateMenu,
   getTeams,
-})(CreateTeamPage);
+})(TeamPage);

@@ -21,6 +21,16 @@ class BoardController {
       return res.status(200).send(board);
     });
   }
+
+  getUserBoards(req, res) {
+    const user_id = req.user._id;
+    Boards.find({ user_id: user_id }, (err, data) => {
+      if (err) {
+        return res.status(500).send("Somethin wents wrong");
+      }
+      return res.status(200).send(data);
+    }).limit(4);
+  }
 }
 
 module.exports = new BoardController();

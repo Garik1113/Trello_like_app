@@ -2,6 +2,7 @@ import {
   GET_TEAM_BOARDS,
   TOGGLE_BOARD_CREATE_MENU,
   CREATE_NEW_BOARD,
+  GET_USER_BOARDS,
 } from "../constants";
 
 const initialState = {
@@ -23,6 +24,8 @@ export const boards = (state = initialState, action) => {
         userBoards: [...state.userBoards, action.payload],
         currentBoard: action.payload,
       };
+    case GET_USER_BOARDS:
+      return { ...state, userBoards: action.payload };
     case TOGGLE_BOARD_CREATE_MENU:
       return { ...state, isCreatBoardMenuOpen: action.payload };
     default:

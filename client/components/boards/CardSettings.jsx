@@ -18,6 +18,16 @@ class CardSettings extends React.Component {
             <div className='card-title-wrapper'>
               <h2 className='card-title'>Card Title</h2>
             </div>
+            {this.props.currentCard.members.length > 0 && (
+              <div className='card-member-list-wrapper'>
+                <h5>Members</h5>
+                <ul className='card-settings-members'>
+                  {this.props.currentCard.members.map((e, i) => {
+                    return <li key={i}>{e.memberEmail[0].toUpperCase()}</li>;
+                  })}
+                </ul>
+              </div>
+            )}
             <div className='card-description-wrapper'>
               <h3 className='card-title'>Description</h3>
               {!this.state.isOpenDescriptionTextarea && (

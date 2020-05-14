@@ -5,6 +5,8 @@ import { inviteMembers } from "../../actions/teamActions";
 class MemberSettings extends React.Component {
   state = {
     memberEmail: "",
+    successMsg: "",
+    errorMsg: "",
   };
   inviteMembers = () => {
     const { memberEmail } = this.state;
@@ -16,6 +18,16 @@ class MemberSettings extends React.Component {
       team_id
     ) {
       this.props.inviteMembers(memberEmail, team_id);
+      this.setState({
+        memberEmail: "",
+        successMsg: "Member has been added successfully",
+        errorMsg: "",
+      });
+    } else {
+      this.setState({
+        successMsg: "",
+        errorMsg: "Something wents wrong",
+      });
     }
   };
   render() {
@@ -24,6 +36,11 @@ class MemberSettings extends React.Component {
         <div className='row'>
           <div className='col-6 offset-3 mt-2 members-add-wrapper'>
             <h3 className='members-add-title'>Invite Your Team</h3>
+            {this.state.successMsg ? (
+              <h6 className='text-center mt-2'>{this.state.successMsg}</h6>
+            ) : (
+              <h6 className='text-center mt-2'>{this.state.errorMsg}</h6>
+            )}
             <p className='members-add-text'>
               Trello makes teamwork your best work. Invite your new team members
               to get going!

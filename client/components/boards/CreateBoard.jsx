@@ -21,7 +21,6 @@ class CreateBoard extends React.Component {
     }).params;
     const { boardName } = this.state;
     const team_id = this.props.selectedTeam._id || id;
-    console.log(this.props.selectedTeam);
     if (boardName && team_id) {
       this.props.createNewBoard(boardName, team_id);
     }

@@ -60,7 +60,11 @@ class TeamPage extends React.Component {
         <div className='col-2 offset-10'>
           {this.props.userMenuOpen && <UserMenu />}
         </div>
-        {this.props.isTeamWindowOpen && <CreateTeam />}
+        {this.props.isTeamWindowOpen && (
+          <div className='dark'>
+            <CreateTeam />
+          </div>
+        )}
         <div>
           <TeamSittingsHeader>
             <div className='col-3 offset-3 d-flex align-items-start'>

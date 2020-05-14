@@ -1,8 +1,16 @@
-import { CREATE_NEW_CARD, GET_ALL_BOARD_CARDS } from "../constants";
+import {
+  CREATE_NEW_CARD,
+  GET_ALL_BOARD_CARDS,
+  TOGGLE_CURRENT_CARD_OPEN,
+  GET_SEARCHING_MEMBERS,
+  CLEAR_SEARCH_RESULTS,
+  ADD_MEMBER_TO_CARD,
+} from "../constants";
 
 const initialState = {
-  currentCard: {},
+  currentCard: null,
   cards: [],
+  searchingMembers: [],
 };
 
 export const card = (state = initialState, action) => {
@@ -11,6 +19,28 @@ export const card = (state = initialState, action) => {
       return { ...state, cards: [...state.cards, action.payload] };
     case GET_ALL_BOARD_CARDS:
       return { ...state, cards: action.payload };
+    case TOGGLE_CURRENT_CARD_OPEN:
+      if (action.payload.isOpen) {
+        const currentCard = state.cards.find(
+          (e) => e._id === action.payload.card_id
+        );
+
+        return { ...state, currentCard };
+      } else {
+        return { ...state, currentCard: null };
+      }
+    case GET_SEARCHING_MEMBERS:
+      return { ...state, searchingMembers: action.payload };
+    case CLEAR_SEARCH_RESULTS:
+      return { ...state, searchingMembers: [] };
+    case ADD_MEMBER_TO_CARD:
+      return {
+        ...state,
+        currentCard: {
+          ...state.currentCard,
+          members: [...state.currentCard.members, action.payload.member],
+        },
+      };
     default:
       return state;
   }

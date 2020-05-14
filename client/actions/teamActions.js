@@ -118,7 +118,5 @@ export const selectTeam = (team_id) => {
 export const inviteMembers = (email, team_id) => (dispatch, getState) => {
   axios
     .post("/teams/invite", { email, team_id }, tokenConfig(getState))
-    .then((res) => {
-      console.log(res);
-    });
+    .catch((e) => returnErrors(e.response.data, e.response.status));
 };

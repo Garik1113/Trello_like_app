@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CreateTeam from "../teams/CreateTeam.jsx";
 import UserMenu from "../userComponents/UserMenu.jsx";
 import { addNewList, getLists } from "../../actions/listActions";
-import { getAllBoardCards } from "../../actions/cardActions";
+import { getAllBoardCards, toggleCurrentCard } from "../../actions/cardActions";
 import { matchPath } from "react-router";
 import Draggable from "../Dnd/Draggable/index";
 import Droppable from "../Dnd/Droppable/index";
@@ -29,7 +29,6 @@ class BoardPage extends React.Component {
   state = {
     addListToggle: "btn",
     listName: "",
-    toggleCardSettings: false,
   };
   componentDidMount() {
     const { id } = matchPath(history.location.pathname, {
@@ -52,7 +51,6 @@ class BoardPage extends React.Component {
       this.props.addNewList(name, id);
       console.log(this.state.addListToggle);
       this.setState({ addListToggle: "btn" });
-      console.log(this.state.addListToggle);
     }
   };
   render() {
@@ -65,7 +63,11 @@ class BoardPage extends React.Component {
     return (
       <div>
         <Header />
-        {this.props.isTeamWindowOpen && <CreateTeam />}
+        {this.props.isTeamWindowOpen && (
+          <div className='dark'>
+            <CreateTeam />
+          </div>
+        )}
         <div className='col-3 offset-9 mt-2'>
           {this.props.userMenuOpen && <UserMenu />}
         </div>
@@ -79,9 +81,9 @@ class BoardPage extends React.Component {
                       return (
                         <Draggable id={c._id} key={c._id} card_id={c._id}>
                           <Item
-                            onClick={() =>
-                              this.setState({ toggleCardSettings: true })
-                            }
+                            onClick={() => {
+                              this.props.toggleCurrentCard(c._id, true);
+                            }}
                           >
                             {c.name}
                           </Item>
@@ -127,10 +129,11 @@ class BoardPage extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.toggleCardSettings && (
+        {this.props.currentCard && (
           <div className='row'>
             <CardSettings
-              close={() => this.setState({ toggleCardSettings: false })}
+              close={() => this.props.toggleCurrentCard(false)}
+              currentCard={this.props.currentCard}
             />
           </div>
         )}
@@ -144,9 +147,11 @@ const mapStateToprops = (state) => ({
   userMenuOpen: state.user.userMenuOpen,
   lists: state.list.lists,
   cards: state.card.cards,
+  currentCard: state.card.currentCard,
 });
 export default connect(mapStateToprops, {
   addNewList,
   getLists,
   getAllBoardCards,
+  toggleCurrentCard,
 })(BoardPage);

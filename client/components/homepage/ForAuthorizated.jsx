@@ -49,25 +49,27 @@ class ForAuthorizated extends React.Component {
               })}
             </div>
 
-            <div className='col-6 d-flex  justify-content-center flex-wrap'>
-              <h3 className='text-center mt-4'>Your Team Boards</h3>
-              <div className='d-flex align-items-center justify-content-center flex-wrap'>
-                {this.props.userBoards.map((e, i) => {
-                  return (
-                    <div className='mr-2 mb-2' key={e._id}>
-                      <Link
-                        to={`/boards/pages/${e._id}`}
-                        className='normal-link'
-                      >
-                        <div className='board-card'>
-                          <h3>{e.name}</h3>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })}
+            {this.props.userBoards.length > 0 && (
+              <div className='col-6'>
+                <h3 className='text-center mt-4'>Your Team Boards</h3>
+                <div className='d-flex align-items-center justify-content-center flex-wrap'>
+                  {this.props.userBoards.map((e, i) => {
+                    return (
+                      <div className='mr-2 mb-2' key={e._id}>
+                        <Link
+                          to={`/boards/pages/${e._id}`}
+                          className='normal-link'
+                        >
+                          <div className='board-card'>
+                            <h3>{e.name}</h3>
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

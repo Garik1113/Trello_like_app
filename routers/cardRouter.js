@@ -13,5 +13,15 @@ CardRouter.post(
   authenticateUser,
   CardController.changeCardList
 );
+CardRouter.post(
+  "/searchMembers",
+  authenticateUser,
+  CardController.searchMembers
+);
+CardRouter.post(
+  "/addMemberToCard",
+  authenticateUser,
+  CardController.addMemberToCard
+);
 
 module.exports = CardRouter;

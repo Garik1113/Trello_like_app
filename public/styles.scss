@@ -186,7 +186,7 @@ ul {
 .dark {
   width: 100%;
   height: 100%;
-  background: #02000180;
+  background: #0200011c;
   z-index: 15;
 }
 .create-team-btn {
@@ -211,10 +211,10 @@ ul {
 .create-team-wrapper {
   width: 100%;
   height: 500px;
-  position: absolute; /*it can be fixed too*/
+  position: fixed;
   left: 0;
   right: 0;
-  top: 100px;
+  top: 0px;
   bottom: 0;
   margin: auto;
   text-align: center;
@@ -292,10 +292,10 @@ ul {
   text-align: center;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
+  position: fixed;
   z-index: 15;
   right: 0px;
-  top: -40px;
+  top: 60px;
   border-radius: 5px;
 }
 .user-menu-btn {
@@ -378,10 +378,10 @@ h2.team-name {
   color: #172b4d;
   font-weight: 600;
   border: none;
-  margin-bottom: -2px;
+  margin-bottom: -1px;
   border: 2px solid #888888;
   border-radius: 3px;
-  outline: none;
+
   &:focus {
     outline: none;
   }
@@ -392,8 +392,8 @@ h2.team-name {
 .active-setting {
   background: #ffffff;
   color: #000000;
-  // border: 2px solid #888;
-  border-bottom: none;
+  border: 2px solid #888;
+  border-bottom: 1px solid #ffffff;
   &:hover {
     background: #ffffff;
     color: #000000;
@@ -537,8 +537,6 @@ h2.team-name {
 }
 
 //Board Page
-.add-list-wrapper {
-}
 .select-input-btn {
   width: 100%;
   max-width: 300px;
@@ -820,7 +818,33 @@ h2.team-name {
     outline: none;
   }
 }
-
+.card-member-list-wrapper {
+  margin-left: 30px;
+  margin-top: 15px;
+  h5 {
+    font-size: 18px;
+    color: #939a9e;
+  }
+}
+.card-settings-members {
+  display: flex;
+  align-items: center;
+  li {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #6d7470;
+    color: #ffffff;
+    margin: 0.2rem;
+    text-align: center;
+    line-height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    &:hover {
+      background: #abb1ae;
+    }
+  }
+}
 //Card Settings Add Member Wrapper
 
 .card-add-member-wrapper {
@@ -888,5 +912,17 @@ h2.team-name {
   &:hover {
     background: #555555;
     color: #ffffff;
+  }
+}
+
+.searching-member {
+  width: 80%;
+  height: 30px;
+  background: #777777;
+  color: #ffffff;
+  margin: 5px auto;
+  cursor: pointer;
+  &:hover {
+    background: #999999;
   }
 }

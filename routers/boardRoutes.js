@@ -14,4 +14,10 @@ BoardRouter.get(
   authenticateUser,
   BoardController.getUserBoards
 );
+
+BoardRouter.get(
+  "/getCurrent/:board_id",
+  authenticateUser,
+  BoardController.getCurrentBoard
+);
 module.exports = BoardRouter;

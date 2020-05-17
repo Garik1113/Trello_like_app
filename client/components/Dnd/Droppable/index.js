@@ -40,6 +40,8 @@ class Droppable extends React.Component {
         {this.props.children}
         {this.state.addCardInputOpen === true ? (
           <button
+            // onDrop={(e) => console.log(e.target)}
+
             className='select-input-btn'
             onClick={() => this.setState({ addCardInputOpen: false })}
           >
@@ -56,7 +58,11 @@ class Droppable extends React.Component {
                 &times;
               </span>
             </div>
-            <button className='add-list-btn' onClick={this.addCard}>
+            <button
+              className='add-list-btn'
+              onClick={this.addCard}
+              onDrop={(e) => e.preventDefault()}
+            >
               Add Card
             </button>
           </div>

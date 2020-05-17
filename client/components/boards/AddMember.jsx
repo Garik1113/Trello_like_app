@@ -7,9 +7,13 @@ import {
 } from "../../actions/cardActions";
 
 class AddMembers extends React.Component {
+  state = {
+    email: "",
+  };
   search = (e) => {
-    const email = e.target.value;
-    if (email.length > 3) {
+    this.setState({ email: e.target.value });
+    const email = this.state.email;
+    if (email.length >= 2) {
       this.props.searchMembers(email, this.props.currentCard.board_id);
     }
     if (email.length < 3) {
@@ -24,17 +28,25 @@ class AddMembers extends React.Component {
         <input
           type='text'
           placeholder='Search members'
+          value={this.state.email}
           onChange={this.search}
         />
         <ul>
+          {!this.props.searchingMembers.length && this.state.email.length > 2 && (
+            <div className='team-members-not-exist'>
+              <span>There is no team members added yet</span>
+            </div>
+          )}
           {this.props.searchingMembers.map((e) => {
             return (
               <li
                 key={e._id}
                 className='searching-member'
-                onClick={() =>
-                  this.props.addMemberToCard(e, this.props.currentCard._id)
-                }
+                onClick={() => {
+                  this.props.addMemberToCard(e, this.props.currentCard._id);
+                  this.setState({ email: "" });
+                  this.props.clearSearchResults();
+                }}
               >
                 {e.memberEmail}
               </li>

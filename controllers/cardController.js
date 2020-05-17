@@ -1,6 +1,7 @@
 const Cards = require("../models/card");
 const Teams = require("../models/team");
 const Boards = require("../models/board");
+const fs = require("fs");
 class CardController {
   async create(req, res) {
     const { name, list_id, board_id } = req.body;
@@ -33,19 +34,7 @@ class CardController {
   }
   async searchMembers(req, res) {
     const { board_id, memberEmail } = req.body;
-    // console.log(board_id);
     const board = await Boards.findById(board_id);
-    // const team = await Teams.find(
-    //   { _id: board.team_id },
-    //   { members: { $elemMatch: { memberEmail: memberEmail } } }
-    // );
-
-    // const team = await Teams.findOne(
-    //   { _id: board.team_id },
-    //   {
-    //     members: { $elemMatch: { memberEmail: { $in: memberEmail } } },
-    //   }
-    // );
     const team = await Teams.findOne(
       { _id: board.team_id },
       {
@@ -69,6 +58,39 @@ class CardController {
         return res.status(200).send("ok");
       }
     );
+  }
+  async addImage(req, res) {
+    const { card_id } = req.params;
+    if (req.file) {
+      const card = await Cards.findById(card_id);
+      const oldImagePath = card.imgSrc;
+      if (oldImagePath) {
+        fs.unlink("public" + oldImagePath, (err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+      const { filename } = req.file;
+      const filePath = "/uploads/" + filename;
+      Cards.findByIdAndUpdate(card_id, { imgSrc: filePath }, (err, data) => {
+        if (err) {
+          return res.status(500).send("Something wents wrong");
+        }
+        return res.status(200).send(filePath);
+      });
+    }
+  }
+  addDescription(req, res) {
+    const { card_id, text } = req.body;
+    if (text && card_id) {
+      Cards.findByIdAndUpdate(card_id, { description: text }, (err) => {
+        if (err) {
+          return res.status(500).send("Something wents wrong");
+        }
+        return res.status(200).send("Ok");
+      });
+    }
   }
 }
 

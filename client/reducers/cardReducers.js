@@ -5,6 +5,8 @@ import {
   GET_SEARCHING_MEMBERS,
   CLEAR_SEARCH_RESULTS,
   ADD_MEMBER_TO_CARD,
+  ADD_CARD_IMAGE,
+  ADD_CARD_DESCRIPTION,
 } from "../constants";
 
 const initialState = {
@@ -40,6 +42,16 @@ export const card = (state = initialState, action) => {
           ...state.currentCard,
           members: [...state.currentCard.members, action.payload.member],
         },
+      };
+    case ADD_CARD_IMAGE:
+      return {
+        ...state,
+        currentCard: { ...state.currentCard, imgSrc: action.payload },
+      };
+    case ADD_CARD_DESCRIPTION:
+      return {
+        ...state,
+        currentCard: { ...state.currentCard, description: action.payload },
       };
     default:
       return state;

@@ -5,7 +5,7 @@ const card = new Schema({
   board_id: String,
   team_id: String,
   description: String,
-  imgSrc: String,
+  imgSrc: { type: String },
   members: [
     {
       memberEmail: String,

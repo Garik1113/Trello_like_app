@@ -3,6 +3,7 @@ import {
   TOGGLE_BOARD_CREATE_MENU,
   CREATE_NEW_BOARD,
   GET_USER_BOARDS,
+  GET_CURRENT_BOARD,
 } from "../constants";
 
 const initialState = {
@@ -24,6 +25,8 @@ export const boards = (state = initialState, action) => {
         userBoards: [...state.userBoards, action.payload],
         currentBoard: action.payload,
       };
+    case GET_CURRENT_BOARD:
+      return { ...state, currentBoard: action.payload };
     case GET_USER_BOARDS:
       return { ...state, userBoards: action.payload };
     case TOGGLE_BOARD_CREATE_MENU:

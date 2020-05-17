@@ -453,7 +453,6 @@ h2.team-name {
   background: #3b383abd;
   width: 100%;
   min-width: 300px;
-  // height: 150px;
   padding: 10px 15px;
   margin-top: 20px;
   border-radius: 7px;
@@ -472,6 +471,19 @@ h2.team-name {
       font-weight: bolder;
     }
   }
+
+  .create-board-images-wrapper {
+    width: 100%;
+    height: 200px;
+    padding: 10px 15px;
+    background: #d3aac548;
+    border-radius: 7px;
+    // display: flex;
+    // flex-wrap: wrap;
+    padding-top: 20px;
+    background: red;
+  }
+
   .current-team-name-btn {
     display: flex;
     align-items: center;
@@ -541,7 +553,7 @@ h2.team-name {
   width: 100%;
   max-width: 300px;
   padding: 0.4rem;
-  background: #5555552d;
+  background: #8282aadc;
   border: none;
   border-radius: 5px;
   font-size: 18px;
@@ -549,7 +561,7 @@ h2.team-name {
   align-items: center;
   min-width: 200px;
   &:hover {
-    background: #3333333a;
+    background: #f8f6f63a;
   }
   &:focus {
     border: none;
@@ -614,6 +626,12 @@ h2.team-name {
   color: #ffffff;
 }
 
+.add-list-wrapper {
+  min-width: 300px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
 //Drag And Drop components
 
 .droppable-wrapper {
@@ -624,6 +642,7 @@ h2.team-name {
   text-align: center;
   border-radius: 7px;
   margin: 10px;
+  margin-left: 20px;
 }
 
 //Members component
@@ -679,15 +698,18 @@ h2.team-name {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #00000088;
+  background: #000000c9;
   z-index: 20;
   .card-settings {
     width: 100%;
+    max-width: 600px;
     height: 600px;
     background: #d1dee2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 70px;
+    margin: 70px auto;
     border-radius: 5px;
+    padding-bottom: 15px;
+    position: relative;
     .card-title-wrapper {
       display: block;
       width: 100%;
@@ -699,12 +721,19 @@ h2.team-name {
   }
 }
 
-.card-img {
-  max-width: 300px;
-  height: auto;
-  margin-left: 24%;
-  margin-top: 15px;
+.card-settings-main {
+  width: 80%;
 }
+
+.card-img-wrapper {
+  max-width: 300px;
+  height: 200px;
+  margin: 10px auto;
+  .card-img {
+    width: 100%;
+  }
+}
+
 .card-title {
   color: #2c2e3d;
   font-size: 20px;
@@ -794,9 +823,7 @@ h2.team-name {
 .card-settings-sidebar {
   width: 20%;
   min-width: 200px;
-  height: auto;
-  position: relative;
-  top: 50px;
+  height: 100%;
   h5 {
     font-size: 16px;
     color: #666666;
@@ -824,6 +851,20 @@ h2.team-name {
   h5 {
     font-size: 18px;
     color: #939a9e;
+  }
+}
+
+.team-members-not-exist {
+  width: 80%;
+
+  background: #999999;
+  padding: 2rem;
+  text-align: center;
+  margin: 5px auto;
+  border-radius: 3px;
+  span {
+    font-size: 14px;
+    color: royalblue;
   }
 }
 .card-settings-members {
@@ -854,12 +895,12 @@ h2.team-name {
   min-width: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  z-index: 5;
-  top: 130px;
-  right: 10px;
   text-align: center;
   border-radius: 4px;
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  z-index: 25;
   h4 {
     font-size: 18px;
   }
@@ -882,8 +923,8 @@ h2.team-name {
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   position: absolute;
-  z-index: 5;
-  top: 170px;
+  z-index: 25;
+  bottom: 10px;
   right: 10px;
   text-align: center;
   border-radius: 4px;

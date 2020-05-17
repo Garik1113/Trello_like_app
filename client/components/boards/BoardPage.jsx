@@ -5,6 +5,7 @@ import CreateTeam from "../teams/CreateTeam.jsx";
 import UserMenu from "../userComponents/UserMenu.jsx";
 import { addNewList, getLists } from "../../actions/listActions";
 import { getAllBoardCards, toggleCurrentCard } from "../../actions/cardActions";
+import { getCurrentBoard } from "../../actions/boardActions";
 import { matchPath } from "react-router";
 import Draggable from "../Dnd/Draggable/index";
 import Droppable from "../Dnd/Droppable/index";
@@ -29,6 +30,7 @@ class BoardPage extends React.Component {
   state = {
     addListToggle: "btn",
     listName: "",
+    board_id: "",
   };
   componentDidMount() {
     const { id } = matchPath(history.location.pathname, {
@@ -36,7 +38,12 @@ class BoardPage extends React.Component {
       exact: true,
       strict: true,
     }).params;
+    this.setState({
+      board_id: id,
+    });
     this.props.getAllBoardCards(id);
+    this.props.getCurrentBoard(id);
+
     return this.props.getLists(id);
   }
 
@@ -49,7 +56,6 @@ class BoardPage extends React.Component {
     }).params;
     if (name && id) {
       this.props.addNewList(name, id);
-      console.log(this.state.addListToggle);
       this.setState({ addListToggle: "btn" });
     }
   };
@@ -59,7 +65,7 @@ class BoardPage extends React.Component {
       exact: true,
       strict: true,
     }).params.id;
-
+    const { backgroundPath } = this.props.currentBoard;
     return (
       <div>
         <Header />
@@ -68,35 +74,51 @@ class BoardPage extends React.Component {
             <CreateTeam />
           </div>
         )}
-        <div className='col-3 offset-9 mt-2'>
-          {this.props.userMenuOpen && <UserMenu />}
-        </div>
-        <div className='row d-flex justify-content-start flex-wrap'>
-          {this.props.lists.map((e, i) => {
-            return (
-              <div className='col-3' key={e._id}>
-                <Droppable name={e.name} list_id={e._id} board_id={board_id}>
-                  {this.props.cards.map((c, i) => {
-                    if (c.list_id === e._id) {
-                      return (
-                        <Draggable id={c._id} key={c._id} card_id={c._id}>
-                          <Item
-                            onClick={() => {
-                              this.props.toggleCurrentCard(c._id, true);
-                            }}
-                          >
-                            {c.name}
-                          </Item>
-                        </Draggable>
-                      );
-                    }
-                  })}
-                </Droppable>
-              </div>
-            );
-          })}
+        <div
+          style={{
+            background: `url(${backgroundPath}) no-repeat`,
+            width: "auto",
+            height: "800px",
+          }}
+        >
+          <div className='col-3 offset-9 mt-2'>
+            {this.props.userMenuOpen && <UserMenu />}
+          </div>
+          <div className='row d-flex justify-content-start flex-wrap'>
+            {this.props.lists.map((e, i) => {
+              return (
+                <div key={e._id}>
+                  <Droppable name={e.name} list_id={e._id} board_id={board_id}>
+                    {this.props.cards.map((c, i) => {
+                      if (c.list_id === e._id) {
+                        return (
+                          <Draggable id={c._id} key={c._id} card_id={c._id}>
+                            <Item
+                              onClick={() => {
+                                this.props.toggleCurrentCard(c._id, true);
+                              }}
+                            >
+                              {c.name}
+                              <br />
 
-          <div className='col-3 ml-2'>
+                              {c.imgSrc && (
+                                <img
+                                  src={c.imgSrc}
+                                  draggable='false'
+                                  alt=''
+                                  style={{ width: "200px" }}
+                                />
+                              )}
+                            </Item>
+                          </Draggable>
+                        );
+                      }
+                    })}
+                  </Droppable>
+                </div>
+              );
+            })}
+
             <div className='add-list-wrapper'>
               {this.state.addListToggle === "btn" ? (
                 <button
@@ -129,10 +151,14 @@ class BoardPage extends React.Component {
             </div>
           </div>
         </div>
+
         {this.props.currentCard && (
           <div className='row'>
             <CardSettings
-              close={() => this.props.toggleCurrentCard(false)}
+              close={() => {
+                this.props.toggleCurrentCard(false);
+                this.props.getAllBoardCards(this.state.board_id);
+              }}
               currentCard={this.props.currentCard}
             />
           </div>
@@ -154,4 +180,5 @@ export default connect(mapStateToprops, {
   getLists,
   getAllBoardCards,
   toggleCurrentCard,
+  getCurrentBoard,
 })(BoardPage);

@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addImageToCard } from "../../actions/cardActions";
 
-export default class AddAtachment extends React.Component {
+class AddAtachment extends React.Component {
   render() {
     return (
       <div className='card-add-attachment-wrapper'>
@@ -9,8 +11,20 @@ export default class AddAtachment extends React.Component {
         <label htmlFor='file' className='add-image-label'>
           Add image
         </label>
-        <input type='file' id='file' className='add-image-input' />
+        <input
+          type='file'
+          id='file'
+          name='image'
+          className='add-image-input'
+          onChange={(e) => {
+            this.props.addImageToCard(this.props.card_id, e.target.files);
+            this.props.closeAttachmentWindow();
+          }}
+        />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({});
+export default connect(mapStateToProps, { addImageToCard })(AddAtachment);

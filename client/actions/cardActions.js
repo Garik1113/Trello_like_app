@@ -7,6 +7,8 @@ import {
   GET_SEARCHING_MEMBERS,
   CLEAR_SEARCH_RESULTS,
   ADD_MEMBER_TO_CARD,
+  ADD_CARD_IMAGE,
+  ADD_CARD_DESCRIPTION,
 } from "../constants";
 import { returnErrors } from "./errorActions";
 
@@ -94,6 +96,37 @@ export const addMemberToCard = (member, card_id) => (dispatch, getState) => {
         return dispatch({
           type: ADD_MEMBER_TO_CARD,
           payload: { member, card_id },
+        });
+      }
+    })
+    .catch((e) => returnErrors(e.response.data, e.response.status));
+};
+
+export const addImageToCard = (card_id, img) => (dispatch, getState) => {
+  const image = new FormData();
+  image.append("image", img[0]);
+  axios
+    .post(`/cards/addImage/${card_id}`, image, tokenConfig(getState))
+    .then((res) => {
+      if (res.status === 200) {
+        return dispatch({
+          type: ADD_CARD_IMAGE,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((e) => returnErrors(e.response.data, e.response.status));
+};
+
+export const addCardDescription = (text) => (dispatch, getState) => {
+  const card_id = getState().card.currentCard._id;
+  axios
+    .post("/cards/addDescription", { card_id, text }, tokenConfig(getState))
+    .then((res) => {
+      if (res.status === 200) {
+        return dispatch({
+          type: ADD_CARD_DESCRIPTION,
+          payload: text,
         });
       }
     })
